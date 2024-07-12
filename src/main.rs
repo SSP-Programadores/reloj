@@ -1,5 +1,5 @@
 use digitos::ClockDisplay;
-use std::{thread, time::Duration};
+use std::{thread::{self, Thread}, time::Duration};
 
 
 
@@ -22,18 +22,13 @@ use macroquad::prelude::*;
 async fn main() {
     let mut reloj = ClockDisplay::new(); 
     
-    loop {
+    loop {       
         
-        
-        
-        clear_background(RED);
-
-        draw_line(40.0, 40.0, 100.0, 200.0, 15.0, BLUE);
-        draw_rectangle(screen_width() / 2.0 - 60.0, 100.0, 120.0, 60.0, GREEN);
-        draw_circle(screen_width() - 30.0, screen_height() - 30.0, 15.0, YELLOW);
-        let hora = reloj.funciona();
-        draw_text(reloj.funciona(), 20.0, 20.0, 30.0, DARKGRAY);
-
+        clear_background(WHITE);
+        reloj.funciona();
+        let hora = reloj.to_string();
+        draw_text(&hora, 200.0, 200.0, 100.0, RED);
+        thread::sleep(Duration::from_millis(1000));
         next_frame().await
     }
     
