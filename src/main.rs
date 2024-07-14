@@ -1,20 +1,5 @@
 use digitos::ClockDisplay;
-use std::{thread::{self, Thread}, time::Duration};
-
-
-
-/*fn main() {
-    let mut reloj = ClockDisplay::new(); 
-    let hilo = thread::spawn(move || {
-        loop {
-            reloj.funciona();
-            println!("{}", reloj);
-            thread::sleep(Duration::from_secs(1));
-        }
-    });
-    let _ = hilo.join();
-}
-*/
+use std::{thread, time::Duration};
 
 use macroquad::prelude::*;
 
@@ -22,8 +7,7 @@ use macroquad::prelude::*;
 async fn main() {
     let mut reloj = ClockDisplay::new(); 
     
-    loop {       
-        
+    loop {        
         clear_background(WHITE);
         reloj.funciona();
         let hora = reloj.to_string();

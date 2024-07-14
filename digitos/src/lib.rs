@@ -44,10 +44,18 @@ impl ClockDisplay {
     }
 
     pub fn funciona(&mut self) {
-        self.segundos.incrementar();
-        if self.segundos.value == 0 {
-            self.minutes.incrementar();
-        } 
+        let mut acarreo = Vec::new();
+        if self.minutes.value == self.minutes.limit &&
+            self.segundos.value == self.segundos.limit {
+            acarreo.push(&mut self.hours);
+        }
+        if self.segundos.value == self.segundos.limit {
+            acarreo.push(&mut self.minutes);
+        }
+        acarreo.push(&mut self.segundos);
+        for i in acarreo {
+            i.incrementar();
+        }
     }
 
     fn normalizar(n: u8) -> String {
